@@ -38,3 +38,5 @@ class VideoGameManager(models.Manager):
         average_rating = self.aggregate(average_rating=Avg('rating'))['average_rating']
 
         return f'{average_rating:.1f}'
+
+# Task 3
