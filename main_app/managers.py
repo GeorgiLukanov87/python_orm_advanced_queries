@@ -1,6 +1,6 @@
 from _decimal import Decimal
 from django.db import models
-from django.db.models import QuerySet, Count
+from django.db.models import QuerySet, Count, Max, Min, Avg
 
 
 # Task 1
@@ -18,3 +18,23 @@ class RealEstateListingManager(models.Manager):
         return self.values('location').annotate(
             location_count=Count('location')
         ).order_by('location_count', 'id')[:2]
+
+
+# Task 2
+class VideoGameManager(models.Manager):
+    def games_by_genre(self, genre: str) -> QuerySet:
+        return self.filter(genre=genre)
+
+    def recently_released_games(self, year: int) -> QuerySet:
+        return self.filter(release_year__gte=year)
+
+    def highest_rated_game(self) -> QuerySet:
+        return self.annotate(max_rating=Max('rating')).order_by('-max_rating').first()
+
+    def lowest_rated_game(self) -> QuerySet:
+        return self.annotate(min_rating=Min('rating')).order_by('min_rating').first()
+
+    def average_rating(self) -> str:
+        average_rating = self.aggregate(average_rating=Avg('rating'))['average_rating']
+
+        return f'{average_rating:.1f}'
