@@ -62,3 +62,4 @@ from main_app.models import RealEstateListing
 #     print(f"- {location['location']} ; Listings: {location['location_count']}")
 
 # Task 2
+

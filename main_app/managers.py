@@ -5,7 +5,6 @@ from django.db.models import QuerySet, Count
 
 # Task 1
 class RealEstateListingManager(models.Manager):
-
     def by_property_type(self, property_type: str) -> QuerySet:
         return self.filter(property_type=property_type)
 
@@ -18,4 +17,4 @@ class RealEstateListingManager(models.Manager):
     def popular_locations(self) -> QuerySet:
         return self.values('location').annotate(
             location_count=Count('location')
-        ).order_by('-location', 'id')[:2]
+        ).order_by('location_count', 'id')[:2]

@@ -3,6 +3,7 @@ from django.db import models
 from main_app.managers import RealEstateListingManager
 
 
+# Task 1
 class RealEstateListing(models.Model):
     PROPERTY_TYPE_CHOICES = [
         ('House', 'House'),
