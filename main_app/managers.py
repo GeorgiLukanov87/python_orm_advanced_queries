@@ -39,4 +39,4 @@ class VideoGameManager(models.Manager):
 
         return f'{average_rating:.1f}'
 
-# Task 3
+
